@@ -7,8 +7,6 @@ public class ConcreteCoordinate implements Coordinate {
 	protected int row;
 	protected int column;
 
-	protected ConcreteCoordinate() {
-	}
 
 	protected ConcreteCoordinate(int row, int column) {
 		this.row = row;

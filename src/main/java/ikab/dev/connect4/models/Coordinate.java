@@ -1,14 +1,14 @@
-package ikab.dev.connect4;
+package ikab.dev.connect4.models;
 
 
-import ikab.dev.utils.RectangularBoundedCoordinate;
+import ikab.dev.utils.SquareBoundedCoordinate;
 
-class Coordinate extends RectangularBoundedCoordinate {
+public class Coordinate extends SquareBoundedCoordinate {
 
     public static final int HORIZONTAL_DIMENSION = 7;
     public static final int VERTICAL_DIMENSION = 6;
 
-    Coordinate(int row, int column) {
+    public Coordinate(int row, int column) {
         super(row, column);
     }
 
@@ -20,11 +20,6 @@ class Coordinate extends RectangularBoundedCoordinate {
     @Override
     protected int getVerticalDimension() {
         return VERTICAL_DIMENSION;
-    }
-
-    @Override
-    protected String getErrorMessage() {
-        return Error.WRONG_COORDINATES.toString();
     }
 
     @Override

@@ -1,4 +1,4 @@
-package ikab.dev.connect4;
+package ikab.dev.connect4.models;
 
 public class Turn {
 
@@ -17,24 +17,15 @@ public class Turn {
         this.reset();
     }
 
-    public void play() {
-        this.players[this.activePlayer].play();
-        if (!this.board.isConnect4(this.getActiveColor())){
-            toggleActivePlayer();
+
+    public void next() {
+        if (!this.board.isConnect4(this.getActiveColor()) || this.board.isTie()) {
+            this.activePlayer = (this.activePlayer + 1) % Turn.NUMBER_PLAYERS;
         }
-
-    }
-
-    private void toggleActivePlayer() {
-        this.activePlayer = (this.activePlayer+1) % Turn.NUMBER_PLAYERS;
     }
 
     public Color getActiveColor() {
         return this.players[this.activePlayer].getColor();
-    }
-
-    public void writeWinner() {
-        this.players[this.activePlayer].writeWinner();
     }
 
     public void reset() {
@@ -42,5 +33,17 @@ public class Turn {
             this.players[i] = new Player(Color.get(i), this.board);
         }
         this.activePlayer = 0;
+    }
+
+    public Error getPutTokenError(Column column) {
+        return this.getActivePlayer().getPutTokenError(column);
+    }
+
+    public void putToken(Column column) {
+        this.getActivePlayer().putToken(column);
+    }
+
+    private Player getActivePlayer() {
+        return this.players[this.activePlayer];
     }
 }

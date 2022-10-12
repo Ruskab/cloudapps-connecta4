@@ -1,9 +1,9 @@
-package ikab.dev.connect4;
+package ikab.dev.connect4.views;
 
 
 import ikab.dev.utils.Console;
 
-enum Message {
+public enum Message {
 	TITLE("--- CONNECT 4 ---"),
 	RESUME("Do you want to continue"),
 	HORIZONTAL_LINE("---------------"),
@@ -21,11 +21,11 @@ enum Message {
 		this.message = message;
 	}
 
-	void write() {
+	public void write() {
 		Console.getInstance().write(this.message);
 	}
 
-	void writeln() {
+	public void writeln() {
 		Console.getInstance().writeln(this.message);
 	}
 
