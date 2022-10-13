@@ -6,7 +6,10 @@ import ikab.dev.utils.Direction;
 import java.util.*;
 import java.util.stream.IntStream;
 
+
 public class Board {
+
+    public static final int CONNECT_4_LINE_LIMIT = 4;
 
     private Map<Color, List<Coordinate>> colorCoordinates;
 
@@ -75,13 +78,21 @@ public class Board {
 
         List<Coordinate> colorCoordinates = this.colorCoordinates.get(color);
         for (Coordinate coordinate : colorCoordinates) {
-            for (Direction direction : Direction.values()) {
-                if (new BoardLine(direction, coordinate, this).has4Connect()) {
-                    return true;
-                }
+            for (Direction direction : Direction.getDirections()) {
+                return IntStream.range(1, CONNECT_4_LINE_LIMIT).allMatch(i -> {
+                    var otherCoordinate = new Coordinate(coordinate.getRow() + (i * direction.getRowMove()), coordinate.getColumn() + (i * direction.getColumnMove()));
+                    return isConnected(coordinate, otherCoordinate);
+                });
             }
         }
         return false;
+    }
+
+    private boolean isConnected(Coordinate coordinate, Coordinate otherCoordinate) {
+        if (!this.isInsideBoard(otherCoordinate)) {
+            return false;
+        }
+        return this.getColor(coordinate) == this.getColor(otherCoordinate);
     }
 
 
