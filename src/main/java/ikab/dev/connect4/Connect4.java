@@ -1,26 +1,29 @@
 package ikab.dev.connect4;
 
-import ikab.dev.connect4.models.Game;
+import ikab.dev.connect4.controllers.AcceptorController;
+import ikab.dev.connect4.controllers.Logic;
 import ikab.dev.connect4.views.View;
 
-class Connect4 {
+ abstract class Connect4 {
 
-    private Game game;
     private View view;
 
+    private Logic logic;
+
     Connect4() {
-        this.game = new Game();
-        this.view = new View(this.game);
+        this.logic = new Logic();
+        this.view = this.createView();
     }
 
-    private void play() {
-        do {
-            this.view.start();
-            this.view.play();
-        } while (this.view.resume());
-    }
+    protected abstract View createView();
 
-    public static void main(String[] args) {
-        new Connect4().play();
-    }
+     protected void play() {
+         AcceptorController acceptorController;
+         do {
+             acceptorController = logic.getController();
+             if (acceptorController != null)
+                 acceptorController.accept(this.view);
+         } while (acceptorController != null);
+     }
+
 }

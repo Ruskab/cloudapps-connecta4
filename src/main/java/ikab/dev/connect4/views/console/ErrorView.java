@@ -1,4 +1,4 @@
-package ikab.dev.connect4.views;
+package ikab.dev.connect4.views.console;
 
 import ikab.dev.connect4.models.Error;
 import ikab.dev.utils.Console;

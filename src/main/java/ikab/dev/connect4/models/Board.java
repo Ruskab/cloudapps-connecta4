@@ -13,6 +13,7 @@ public class Board {
 
     private Map<Color, List<Coordinate>> colorCoordinates;
 
+
     public Board() {
         this.colorCoordinates = Map.of(
                 Color.RED, new ArrayList<>(),
@@ -79,13 +80,19 @@ public class Board {
         List<Coordinate> colorCoordinates = this.colorCoordinates.get(color);
         for (Coordinate coordinate : colorCoordinates) {
             for (Direction direction : Direction.getDirections()) {
-                return IntStream.range(1, CONNECT_4_LINE_LIMIT).allMatch(i -> {
-                    var otherCoordinate = new Coordinate(coordinate.getRow() + (i * direction.getRowMove()), coordinate.getColumn() + (i * direction.getColumnMove()));
-                    return isConnected(coordinate, otherCoordinate);
-                });
+                if (is4CoordinatesInLine(coordinate, direction)) {
+                    return true;
+                }
             }
         }
         return false;
+    }
+
+    private boolean is4CoordinatesInLine(Coordinate coordinate, Direction direction) {
+        return IntStream.range(1, CONNECT_4_LINE_LIMIT).allMatch(i -> {
+            var otherCoordinate = new Coordinate(coordinate.getRow() + (i * direction.getRowMove()), coordinate.getColumn() + (i * direction.getColumnMove()));
+            return isConnected(coordinate, otherCoordinate);
+        });
     }
 
     private boolean isConnected(Coordinate coordinate, Coordinate otherCoordinate) {
@@ -116,4 +123,9 @@ public class Board {
         }
         return columnCoordinates;
     }
+
+    public Map<Color, List<Coordinate>> getColorCoordinates() {
+        return colorCoordinates;
+    }
+
 }

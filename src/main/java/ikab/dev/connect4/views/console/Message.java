@@ -1,4 +1,4 @@
-package ikab.dev.connect4.views;
+package ikab.dev.connect4.views.console;
 
 
 import ikab.dev.utils.Console;
@@ -13,7 +13,8 @@ public enum Message {
 	COORDINATE_TO_PUT("Coordinate to put"),
 	COORDINATE_TO_REMOVE("Origin coordinate to move"),
 	COORDINATE_TO_MOVE("Target coordinate to move"),
-	PLAYER_WIN("#player player: You win!!! :-)");
+	PLAYER_WIN("#player player: You win!!! :-)"),
+	ACTION_COMMAND("Do a action"), UNDO_COMMAND("Undo previous action"), REDO_COMMAND("Redo previous action");
 
 	private String message;
 

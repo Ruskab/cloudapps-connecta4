@@ -46,4 +46,8 @@ public class Turn {
     private Player getActivePlayer() {
         return this.players[this.activePlayer];
     }
+
+    public void setActivePlayer(int activePlayer) {
+        this.activePlayer = activePlayer;
+    }
 }

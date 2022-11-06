@@ -42,6 +42,14 @@ public class Game {
     }
 
 
+    public Memento createMemento() {
+        return new Memento(this.board, this.turn);
+    }
 
+    public void setMemento(Memento memento) {
+        this.board = memento.getBoard();
+        this.turn = new Turn(this.board);
+        this.turn.setActivePlayer(memento.getActivePlayer());
+    }
 }
 
